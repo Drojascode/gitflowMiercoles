@@ -57,8 +57,8 @@ jobs:
       - name: Restore dependencies
         run: |
           cd "Vehiculos.WEB"
-          dotnet restore "Abstracciones/*.csproj"
-          dotnet restore "Reglas/*.csproj"
+          dotnet restore "Abstracciones/Abstracciones.csproj"
+          dotnet restore "Reglas/Reglas.csproj"
           dotnet restore "Web/*.csproj"
 
       - name: Build with dotnet (excluding BD project)
@@ -66,7 +66,7 @@ jobs:
           cd "Vehiculos.WEB"
           dotnet build "Abstracciones/Abstracciones.csproj" --configuration Release --no-restore
           dotnet build "Reglas/Reglas.csproj" --configuration Release --no-restore
-          dotnet build "WEB/WEB.csproj" --configuration Release --no-restore
+          dotnet build "Web/Web.csproj" --configuration Release --no-restore
 
       - name: Run tests (excluding BD project)
         run: |
