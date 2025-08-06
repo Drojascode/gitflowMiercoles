@@ -21,7 +21,7 @@ name: Build and deploy Web
 
 env:
   AZURE_WEBAPP_NAME: vehiculoWebMiercolesTest    # Nombre real de tu Azure Web App (debe coincidir con el publish profile)
-  AZURE_WEBAPP_PACKAGE_PATH: './Vehiculo.WEB/WEB'     # Ruta al proyecto API
+  AZURE_WEBAPP_PACKAGE_PATH: './Vehiculos.WEB/WEB'     # Ruta al proyecto API
   DOTNET_VERSION: '8.0'                  # VersiÃ³n .NET 8.0 segÃºn tu proyecto
 
 on:
@@ -56,25 +56,25 @@ jobs:
 
       - name: Restore dependencies
         run: |
-          cd "Vehiculo.WEB"
+          cd "Vehiculos.WEB"
           dotnet restore "Abstracciones/Abstracciones.csproj"
           dotnet restore "Reglas/Reglas.csproj"
           dotnet restore "WEB/WEB.csproj"
 
       - name: Build with dotnet (excluding BD project)
         run: |
-          cd "Vehiculo.WEB"
+          cd "Vehiculos.WEB"
           dotnet build "Abstracciones/Abstracciones.csproj" --configuration Release --no-restore
           dotnet build "Reglas/Reglas.csproj" --configuration Release --no-restore
           dotnet build "WEB/WEB.csproj" --configuration Release --no-restore
 
       - name: Run tests (excluding BD project)
         run: |
-          cd "Vehiculo.WEB"
+          cd "Vehiculos.WEB"
           dotnet test "WEB/WEB.csproj" --no-restore --verbosity normal --configuration Release || echo "No tests found or test execution failed"
 
       - name: dotnet publish
-        run: dotnet publish "Vehiculo.WEB/WEB/API.csproj" -c Release -o ./publish --no-restore
+        run: dotnet publish "Vehiculos.WEB/WEB/API.csproj" -c Release -o ./publish --no-restore
 
       - name: Upload artifact for deployment job
         uses: actions/upload-artifact@v4
