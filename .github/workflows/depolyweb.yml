@@ -59,7 +59,7 @@ jobs:
           cd "Vehiculos.WEB"
           dotnet restore "Abstracciones/Abstracciones.csproj"
           dotnet restore "Reglas/Reglas.csproj"
-          dotnet restore "Web/Web.csproj.csproj"
+          dotnet restore "Web/Web.csproj"
 
       - name: Build with dotnet (excluding BD project)
         run: |
